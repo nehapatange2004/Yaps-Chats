@@ -1,0 +1,23 @@
+
+BACKEND---------------------
+    #Modify:
+        - change the public_id of the img uploaded to cloudinary( either id/ apply an algo/ do something)
+        
+        - change folder where images are uploaded in cloudinary
+
+        - work on the messages route to get the messages and post teh messages based on sender reciever chronology!
+
+        - **Cloudinary: base64 img upload try to achive it!( learn about it!)
+
+Frontend----------------------
+    #Modify:
+        - DONE________due to useRef things are going wrong! he says it it because it not default exported hence not treated as JSX do that 1st(break into comp)
+
+        - DONE________"updateProfile"-> accept both selcting an avatar and uploading an img
+
+        - Just quickly recrete that navbar so that theme are supported(as it's not inthe MUI)
+
+        - Make the setting have the theme togglesing settings
+        
+        - **Cloudinary: base64 img upload try to achive it!( learn about it!)
+        

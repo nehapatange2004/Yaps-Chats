@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React + TS</title>
+
+    <style>
+      svg#freepik_stories-messaging-fun:not(.animated) .animable {
+        opacity: 0;
+      }
+      svg#freepik_stories-messaging-fun.animated #freepik--Floor--inject-2 {
+        animation: 1s 1 forwards cubic-bezier(0.36, -0.01, 0.5, 1.38) zoomOut;
+        animation-delay: 0s;
+      }
+      svg#freepik_stories-messaging-fun.animated #freepik--Shadows--inject-2 {
+        animation: 1s 1 forwards cubic-bezier(0.36, -0.01, 0.5, 1.38) slideLeft;
+        animation-delay: 0s;
+      }
+      svg#freepik_stories-messaging-fun.animated
+        #freepik--paper-planes--inject-2 {
+        animation: 1s 1 forwards cubic-bezier(0.36, -0.01, 0.5, 1.38) slideLeft;
+        animation-delay: 0s;
+      }
+      svg#freepik_stories-messaging-fun.animated #freepik--Furniture--inject-2 {
+        animation: 1s 1 forwards cubic-bezier(0.36, -0.01, 0.5, 1.38) slideRight;
+        animation-delay: 0s;
+      }
+      svg#freepik_stories-messaging-fun.animated #freepik--Puff--inject-2 {
+        animation: 1s 1 forwards cubic-bezier(0.36, -0.01, 0.5, 1.38) slideLeft;
+        animation-delay: 0s;
+      }
+      svg#freepik_stories-messaging-fun.animated #freepik--Plant--inject-2 {
+        animation: 1s 1 forwards cubic-bezier(0.36, -0.01, 0.5, 1.38) slideUp;
+        animation-delay: 0s;
+      }
+      svg#freepik_stories-messaging-fun.animated
+        #freepik--smiley-faces--inject-2 {
+        animation: 1s 1 forwards cubic-bezier(0.36, -0.01, 0.5, 1.38) zoomOut;
+        animation-delay: 0s;
+      }
+      svg#freepik_stories-messaging-fun.animated #freepik--Character--inject-2 {
+        animation: 1s 1 forwards cubic-bezier(0.36, -0.01, 0.5, 1.38) slideLeft;
+        animation-delay: 0s;
+      }
+      svg#freepik_stories-messaging-fun.animated
+        #freepik--speech-bubbles--inject-2 {
+        animation: 1s 1 forwards cubic-bezier(0.36, -0.01, 0.5, 1.38) zoomIn;
+        animation-delay: 0s;
+      }
+      @keyframes zoomOut {
+        0% {
+          opacity: 0;
+          transform: scale(1.5);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      @keyframes slideLeft {
+        0% {
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      @keyframes slideRight {
+        0% {
+          opacity: 0;
+          transform: translateX(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      @keyframes slideUp {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: inherit;
+        }
+      }
+      @keyframes zoomIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    </style>
+    
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

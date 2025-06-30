@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@tailwind utilities;
+@plugin [daisyui] {
+  themes: all;
+}
+@theme {
+  --color-black: rgb(80, 80, 80);
+  --color-white: rgb(255, 219, 250);
+}
+
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  /* place-items: center; */
+  color-scheme: light dark;
+  color: rgba(0, 0, 0, 0.87);
+  /* background-color: rgb(185, 32, 185); */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
