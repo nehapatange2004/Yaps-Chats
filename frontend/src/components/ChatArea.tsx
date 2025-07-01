@@ -68,27 +68,27 @@ const ChatArea = () => {
     
     
   };
-  const handleSendMessage = () => {
-    // const file = e.target.files?.[0];
-    const file = inputImageRef.current?.files?.[0];
-    const text = inputRef.current?.value.trim();
-    console.log("The file useRef: ", file);
-    if (!file && text) {
-      sendMessage(inputRef.current?.value, null);
-    }
-    if (!text && file) {
-      console.log("empty text");
-      sendMessage(null, file);
-      console.log("selected image: ", file);
-    }
-    if (file && text) {
-      sendMessage(inputRef.current?.value, file);
-    }
+  // const handleSendMessage = () => {
+  //   // const file = e.target.files?.[0];
+  //   const file = inputImageRef.current?.files?.[0];
+  //   const text = inputRef.current?.value.trim();
+  //   console.log("The file useRef: ", file);
+  //   if (!file && text) {
+  //     sendMessage(inputRef.current?.value, null);
+  //   }
+  //   if (!text && file) {
+  //     console.log("empty text");
+  //     sendMessage(null, file);
+  //     console.log("selected image: ", file);
+  //   }
+  //   if (file && text) {
+  //     sendMessage(inputRef.current?.value, file);
+  //   }
 
-    if (inputImageRef.current) inputImageRef.current.value = "";
-    console.log("Deleted image from useRef: ", inputImageRef.current?.files);
-    return;
-  };
+  //   if (inputImageRef.current) inputImageRef.current.value = "";
+  //   console.log("Deleted image from useRef: ", inputImageRef.current?.files);
+  //   return;
+  // };
   const handleSend64Message = () => {
     // const file = e.target.files?.[0];
     const file = inputImageRef.current?.files?.[0];
