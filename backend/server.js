@@ -8,8 +8,8 @@ import { hashPassword } from "./utils/auth.utils.js";
 import messageRoute from "./routes/message.route.js";
 import { app, io, server } from "./utils/socket.js";
 
-app.use(express.json());
-app.use(express.json());
+app.use(express.json({limit: "10mb"}));
+
 app.use(cors());
 dotenv.config();
 

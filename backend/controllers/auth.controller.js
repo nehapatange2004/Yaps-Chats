@@ -6,7 +6,6 @@ import {
 import User from "../models/User.js";
 import { v2 as cloudinary } from "cloudinary";
 import dotenv from "dotenv";
-import fs from "fs";
 dotenv.config();
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -119,19 +118,22 @@ export const updateProfilePic = async (req, res) => {
           $set: { profilepic: req.body.profilepic },
         }
       );
-      console.log("profile set in the db done!");
+      // console.log("profile set in the db done!");
       const updatedUser = await User.findOne({ email: req.user?.email });
       console.log("Profile Pic: ", req.body.profilepic);
 
-      console.log("Upadated USERDETAILS: ", updatedUser);
+      // console.log("Upadated USERDETAILS: ", updatedUser);
       return res.send(updatedUser);
     }
-    if (req.file) {
+    // console.log("Body of updateprofile: ", req.body)
+    if(!req.body.base64) return res.send({"message": "No profile pic selected!"});
+    
+    
       //when teh user have his/her own img from storage
-      const filePath = req.file.path;
+      const filePath = req.body.base64;
 
       const result = await cloudinary.uploader.upload(filePath, {
-        public_id: "HelloIDPUBLICID",
+        public_id: `${req.user._id}`,
         overwrite: true,
         folder: "samples/test1",
       });
@@ -147,11 +149,9 @@ export const updateProfilePic = async (req, res) => {
         }
       );
       const updatedUser = await User.findOne({ email: req.user?.email });
-      fs.unlinkSync(filePath);
+      // fs.unlinkSync(filePath);
       return res.send(updatedUser);
-    } else {
-      return res.send("No profile pic selected");
-    }
+    
   } catch (err) {
     return res.status(304).send(err);
   }

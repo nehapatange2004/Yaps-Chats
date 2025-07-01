@@ -1,27 +1,41 @@
 import axios from "axios";
 
-export const uploadBrowsedPic = async (file: File, setUserDetails: React.Dispatch<React.SetStateAction<object>>) => {
-  const backend = import.meta.env.VITE_BACKEND;
+export const uploadBrowsedPic = async (
+  file: File,
+  setUserDetails: React.Dispatch<React.SetStateAction<object>>
+) => {
   // const {setUserDetails} = auth();
-  if (!file) {
-    console.log("No file selected! ");
-    return null;
-  }
+
+  // const base64img = fileReader.readAsDataURL(file);
   // console.log("BACKEND: ", backend)
-  const formData = new FormData();
-  formData.append("file", file);
-  const token = localStorage.getItem("token");
-  if (!token) {
-    console.log("Not Authenticated!");
-  }
+  // const formData = new FormData();
+  // formData.append("file", file);
+
   try {
+    const backend = import.meta.env.VITE_BACKEND;
+    if (!file) {
+      console.log("No file selected! ");
+      return null;
+    }
+    let base64 = await new Promise<string>((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.onload = () => resolve(fileReader.result as string);
+
+      fileReader.onerror = (err) => reject(err);
+      fileReader.readAsDataURL(file);
+    });
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.log("Not Authenticated!");
+      return;
+    }
     const res = await axios.post(
       `${backend}/api/auth/updateprofile`,
-      formData,
+      { base64: base64 },
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data"
         },
       }
     );
@@ -35,4 +49,3 @@ export const uploadBrowsedPic = async (file: File, setUserDetails: React.Dispatc
     return null;
   }
 };
-

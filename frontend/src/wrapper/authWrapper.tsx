@@ -348,6 +348,32 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       console.log("error sending the message: ", err);
     }
   };
+  const sendBase64Message = async (text: any | null, file: string | null) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+      const formData = new FormData();
+      if (file) formData.append("file", file);
+      if (text) formData.append("text", text);
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND}/api/message/send64/${selectedUser?._id}`,
+        {
+          file: file,
+          text: text
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("API Response after sending message: ", response?.data);
+      setAllMessages((prev: any) => [...prev, response.data]);
+    } catch (err) {
+      console.log("error sending the message: ", err);
+    }
+  };
+
   const deleteMessage = async (messageId: string) => {
     try {
       setLoading(true);
@@ -436,6 +462,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         allUsers,
         getAllMessagesForSelectedUser,
         sendMessage,
+        sendBase64Message,
         deleteMessage,
         editMessage,
         selectedUserRef,

@@ -4,7 +4,6 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const JWT_SECRET_KEY = process.env.JWT_SECRET;
-console.log(JWT_SECRET_KEY);
 export const hashPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
   return await bcrypt.hash(password, salt);
@@ -22,7 +21,7 @@ export const comparePasswords = async (pass1, hash) => {
 };
 export const generateToken = (userId, email) => {
   const token = jwt.sign({ userId, email}, JWT_SECRET_KEY, {
-    expiresIn: "10h",
+    expiresIn: "30d",
   });
   console.log(token);
   return token;

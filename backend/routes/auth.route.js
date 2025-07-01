@@ -30,11 +30,10 @@ router.get("/updateprofile", protectedRoute, async (req, res) => {
   res.send(userDetails);
 });
 
-const upload = multer({ dest: "/uploading" });
+// const upload = multer({ dest: "/uploading" });
 router.post(
   "/updateprofile",
   protectedRoute,
-  upload.single("file"),
   updateProfilePic
 );
 router.get("/dash", protectedRoute, async (req, res) => {

@@ -16,6 +16,7 @@ const ChatArea = () => {
     selectedUser,
     onlineUsers,
     sendMessage,
+    sendBase64Message,
     deleteMessage,
     editMessage,
     loading,
@@ -64,6 +65,8 @@ const ChatArea = () => {
     };
     const base64 = fileReader.readAsDataURL(file);
     console.log("Base64: ", base64);
+    
+    
   };
   const handleSendMessage = () => {
     // const file = e.target.files?.[0];
@@ -86,6 +89,28 @@ const ChatArea = () => {
     console.log("Deleted image from useRef: ", inputImageRef.current?.files);
     return;
   };
+  const handleSend64Message = () => {
+    // const file = e.target.files?.[0];
+    const file = inputImageRef.current?.files?.[0];
+    const text = inputRef.current?.value.trim();
+    console.log("The file useRef: ", file);
+    if (!Base64Image && text) {
+      sendBase64Message(inputRef.current?.value, null);
+    }
+    if (!text && Base64Image) {
+      console.log("empty text");
+      sendBase64Message(null, file);
+      console.log("selected image: ", Base64Image);
+    }
+    if (Base64Image && text) {
+      sendBase64Message(inputRef.current?.value, Base64Image);
+    }
+
+    if (inputImageRef.current) inputImageRef.current.value = "";
+    console.log("Deleted image from useRef: ", inputImageRef.current?.files);
+    return;
+  };
+
 
   useEffect(() => {
     // setScrollDown(false);
@@ -388,7 +413,8 @@ const ChatArea = () => {
                 onClick={() => {
                   // sendMessage(inputRef.current?.value);
                   setTyping(false);
-                  handleSendMessage();
+                  // handleSendMessage();
+                  handleSend64Message()
                   setBase64Image(null);
                   inputRef.current?.value
                     ? (inputRef.current.value = "")

@@ -3,7 +3,6 @@ import Message from "../models/Message.js";
 import { getReceiverSocketId, io } from "../utils/socket.js";
 import { v2 as cloudinary } from "cloudinary";
 import dotenv from "dotenv";
-import fs from "fs";
 dotenv.config();
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -28,14 +27,6 @@ export const getMessages = async (req, res) => {
   try {
     const receiverId = req.params.userId;
     const myId = req.user._id;
-    // console.log("Rciver id: ", receiverId);
-    // console.log("My/sender id: ", myId);
-    // const newMessage = await Message.create({
-    //   senderId: myId,
-    //   receiverId: receiverId,
-    //   text: "Hmmm! Not so good bro 😥! I gotta complete my projects ASAP!",
-    // });
-    // console.log("New message inserted!", newMessage);
     const allMessages = await Message.find({
       $or: [
         { senderId: myId, receiverId: receiverId },
@@ -53,23 +44,23 @@ export const getMessages = async (req, res) => {
   }
 };
 
-export const sendMessage = async (req, res) => {
+export const send64Message = async (req, res) => {
   try {
     // console.log("Body of the sendMessage api: ", req.body);
     const text = req.body.text;
-    const image = req.file;
+    const image = req.body.file;
 
     let img_url = "";
-    const filePath = req.file?.path;
+    // const filePath = req.file?.path;
     if (image) {
-      const response = await cloudinary.uploader.upload(filePath, {
+      const response = await cloudinary.uploader.upload(image, {
         public_id: "MessageImg",
         overwrite: true,
         folder: "samples/test1",
       });
       // console.log("The cloudinary response: ", response);
       img_url = response.secure_url;
-      fs.unlinkSync(filePath);
+      // fs.unlinkSync(filePath);
     }
     const senderId = req.user._id;
     const receiverId = req.params.userId;
