@@ -15,7 +15,7 @@ const ChatArea = () => {
     userDetails,
     selectedUser,
     onlineUsers,
-    sendMessage,
+    // sendMessage,
     sendBase64Message,
     deleteMessage,
     editMessage,
