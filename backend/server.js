@@ -25,8 +25,8 @@ app.get("/", async (req, res) => {
   try {
     const data = await User.find();
 
-    console.log("*Raw data from DB:", data); // Logs everything to console
-    res.send(data);
+    // console.log("*Raw data from DB:", data); // Logs everything to console
+    res.send({"message": "server is on"});
   } catch (err) {
     res.status(500).json({ message: "Error fetching data: ", err });
   }
