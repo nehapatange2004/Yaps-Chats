@@ -11,6 +11,7 @@ const io = new Server(server, {
       "http://192.168.43.162:5173",
       "http://192.168.176.162:5173",
       "http://localhost:5173",
+      "https://yaps-chats.netlify.app",
     ],
   },
 });
