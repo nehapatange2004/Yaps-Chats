@@ -40,7 +40,7 @@ const home = () => {
     }
     toast.custom((t) => (
     <div
-      className={`bg-error text-error-content px-4 py-3 rounded-lg shadow-lg flex items-center justify-between gap-4 ${
+      className={`backdrop-blur-xs bg-accent/20 text-accent-content lg:w-[70vw] mt-4 border border-base-100/50 shadow-accent-content/50 px-4 py-3 rounded-lg shadow-xs flex items-center justify-between gap-4 animate-pulse ${
         t.visible ? 'animate-enter' : 'animate-leave'
       }`}
     >
@@ -60,7 +60,7 @@ Sit back, relax — we’re almost there. Then go ahead, sign up, and start expl
   return (
     <div className="relative h-[calc(100dvh-84px)] border border-current/20 rounded-2xl flex flex-col flex-wrap wrap-anywhere items-center gap-4 overflow-hidden">
 
-      <span className="text-center text-3xl after:border-l-2 pt-18">
+      <span className="text-center text-3xl after:border-l-2 after:animate-pulse pt-18">
         {" "}
         {typingText}
       </span>
