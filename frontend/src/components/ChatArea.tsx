@@ -14,6 +14,7 @@ const ChatArea = () => {
   const {
     userDetails,
     selectedUser,
+    setSelectedUser,
     onlineUsers,
     // sendMessage,
     sendBase64Message,
@@ -33,6 +34,7 @@ const ChatArea = () => {
   const [isSideBarVisible, setIsSideBarVisible] = useState(true);
   const [moreVisibleFor, setMoreVisibleFor] = useState<string | null>(null);
   const myId = userDetails?._id;
+  // useEffect(()=> {checkAuth()}, [])
 
   useEffect(() => {
     if (!loading) {
@@ -178,7 +180,7 @@ const ChatArea = () => {
               <button
                 type="button"
                 className="hidden max-[769px]:flex active:scale-85 active:bg-white/50 transition-transform delay-200 ease-in-out rounded-2xl"
-                onClick={() => setIsSideBarVisible(true)}
+                onClick={() => {setIsSideBarVisible(true); setSelectedUser(null); setAllMessages([])}}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -237,9 +239,9 @@ const ChatArea = () => {
                 >
                   <div className="chat-image avatar"></div>
                   <div className="chat-header">
-                    {ele.sendername}
+                    {ele.senderId ===userDetails?._id? "": selectedUser.name }
                     <time className="text-xs opacity-50">
-                      {formatedTime(`${ele.createdAt}`)}
+                      {formatedTime(`${ele.updatedAt }`)}
                     </time>
                   </div>
                   <div className="relative chat-bubble max-w-[75%] text-left">
@@ -318,7 +320,10 @@ const ChatArea = () => {
                       </div>
                     ) : null}
                   </div>
-                  <div className="chat-footer opacity-50">{ele.tag}</div>
+                  <div className="chat-footer opacity-50">{
+                    ele.senderId==userDetails._id && ele.isRead?"read": ""
+                    // ele.senderId==userDetails._id? "me":"not-me"
+                    }</div>
                 </div>
               ))}
               {typing && <div className="chat chat-start">

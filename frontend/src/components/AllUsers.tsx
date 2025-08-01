@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { auth } from "../wrapper/authWrapper";
+import { auth } from "../wrapper/authWrapper.tsx";
 
 const OnlineUsers = (props: {
   setIsSideBarVisible: React.Dispatch<React.SetStateAction<boolean>>;

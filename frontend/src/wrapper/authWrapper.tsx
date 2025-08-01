@@ -277,6 +277,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     socket.on("newMessage", (newMessage) => {
       if (selectedUserRef?.current?._id == `${newMessage?.senderId}`) {
         setAllMessages((prev: any) => [...prev, newMessage]);
+        //tells that the message is rendered on teh user's page and read realtime
+        socket.emit("read", newMessage)
       }
     });
     socket.on("deletedMessage", (deletedMessage) => {
@@ -298,7 +300,21 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         });
         return temp;
       });
+      // socket.emit("read", updatedMessage);
+      
     });
+    socket.on("readUpdated", (messageId)=>{
+      setAllMessages((prev: [any])=>{
+        return prev.map((ele:any, index:number)=>{
+          if(ele._id == messageId) {
+            ele.isRead = true;
+            console.log("REad is Set to true!")
+          }
+          return ele;
+        })
+      })
+
+    })
     console.log("FE user connected: ", socket.id);
     socket.on("connect", () => {
       console.log("client connected ", socket?.id);
@@ -307,6 +323,13 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     console.log("socket: ", socket);
   };
+// NOTE:
+// while appeding the mesage into the new message which is commin from the sender oyou have to also
+//  send a socket emit event to the sender saying where the message is read or not if the array 
+// is appended with the message then the mess age is asud to be read otherwise no!
+
+
+
   // const handleTypingStatus = () =>{
   //   socket?.emit("sendTypingStatus", {to: selectedUser?._id, from: userDetails?._id});
 

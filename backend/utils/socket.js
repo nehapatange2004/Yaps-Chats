@@ -1,6 +1,7 @@
 import express from "express";
 import http from "http";
 import { Server } from "socket.io";
+import Message from "../models/Message.js";
 const app = express();
 const server = http.createServer(app);
 
@@ -39,6 +40,22 @@ io.on("connection", (socket) => {
       io.to(receiverSocketId).emit("showTypingStatus", {from});
     }
   });
+
+  socket.on("read", (message) => { 
+    const messageId = message._id;
+    const updateReadFlag = async (messageId) => {
+      await Message.updateOne({"_id": messageId},  {"isRead": true});
+      const readUpdated = await Message.findOne({"_id": messageId});
+      console.log("updated read flag: ", readUpdated);
+      const userToRenderReadStatus = getReceiverSocketId(message.senderId)
+      if(userToRenderReadStatus) {
+        socket.to(userToRenderReadStatus).emit("readUpdated", messageId);
+      }
+      
+    }
+    updateReadFlag(messageId);
+  })
+
   socket.on("disconnect", () => {
     console.log("a user disconnected: ", socket.id);
     delete onlineUsersSocketMap[userId];
